@@ -3,7 +3,10 @@ Type: Package
 Title: Evalaute the levels of mutual information in 16S data
 Version: 0.1.0
 Date: 2014-11-01
-Authors@R: person("Gregory", "Ditzler", email = "gregory.ditzler@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Gregory", "Ditzler", email = "gregory.ditzler@gmail.com",
+    role = c("aut", "cre"))
+Depends:
+    R (>= 3.1.0)
 Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 URL: http://github.com/gditzler/MicrobiomeInformation

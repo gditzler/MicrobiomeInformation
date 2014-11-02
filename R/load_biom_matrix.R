@@ -5,10 +5,6 @@
 #'
 #' @param biom_fp string that points to the path of the biom file
 #' @return returns a data.frame that has the result from the biom & dense matrix
-#' @examples
-#' \donotrun{
-#' df <- load_biom_matrix("~/Git/DataCollections/Caporaso/caporaso-gut.biom")
-#' }
 load_biom_matrix <- function(biom_fp) {
   df <- read_biom(biom_fp)  # requires the biom packges are installed  
   biom_data <- matrix(data=0, nrow=df$shape[1], ncol=df$shape[2])
