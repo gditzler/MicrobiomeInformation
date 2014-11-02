@@ -39,6 +39,12 @@ filter_otus <- function(biom_df, lvl=0.2) {
     otu_names <- c(otu_names, biom_df$otu_names[n])
     otu_ids <- c(otu_ids, biom_df$otu_ids[n])
   }
+  biom_df$data_dense <- NULL
+  biom_df$otu_names <- NULL
+  biom_df$otu_ids < NULL
   biom_df$data_dense <- data
+  biom_df$otu_names <- otu_names
+  biom_df$otu_ids < otu_ids
+  print(otu_ids)
   return(biom_df)
 }
