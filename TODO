@@ -9,6 +9,3 @@ FUNCTION
 * write a reproducibles notebook (knitr)
 
 BUGS
-* filter_otus.R does not appear to exporting the results correctly. it is 
-  correctly performing the filtering; however, it does not appear to overwriting
-  the biom_df.  

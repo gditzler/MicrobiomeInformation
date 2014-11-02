@@ -6,7 +6,8 @@
 #' 
 #' @param biom_df data.frame that has be OTU data
 #' @param lvl percentage of abundance to keep 
-#' @return return the biom_df with a subset of OTUs 
+#' @return return the lists containing the reduced data, sample ids, feature names
+#' and feature ids. 
 filter_otus <- function(biom_df, lvl=0.2) {
   if (lvl > 1 || lvl < 0) {
     stop("lvl must be between zero and one.")
@@ -39,12 +40,5 @@ filter_otus <- function(biom_df, lvl=0.2) {
     otu_names <- c(otu_names, biom_df$otu_names[n])
     otu_ids <- c(otu_ids, biom_df$otu_ids[n])
   }
-  biom_df$data_dense <- NULL
-  biom_df$otu_names <- NULL
-  biom_df$otu_ids < NULL
-  biom_df$data_dense <- data
-  biom_df$otu_names <- otu_names
-  biom_df$otu_ids < otu_ids
-  print(otu_ids)
-  return(biom_df)
+  return(list(data=data,otu_names=otu_names,otu_ids=otu_ids, sample_ids=biom_df$sample_ids))
 }
