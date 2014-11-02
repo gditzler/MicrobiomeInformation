@@ -6,7 +6,8 @@ Date: 2014-11-01
 Authors@R: person("Gregory", "Ditzler", email = "gregory.ditzler@gmail.com",
     role = c("aut", "cre"))
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.1.0),
+    biom (>= 0.3.12)
 Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 URL: http://github.com/gditzler/MicrobiomeInformation
