@@ -1,0 +1,10 @@
+COSMETIC
+* extracting the labels works, but it would be nice to have the returned as 
+  something like [male,female] rather than [1,2]. the reason the data are 
+  returned the way they are is because it looks like only the factor level 
+  is being return... not the actual value. 
+
+FUNCTION
+* mutual information calculations on variable importance
+* write a reproducibles notebook (knitr)
+
