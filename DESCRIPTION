@@ -1,0 +1,10 @@
+Package: MicrobiomeInformation
+Type: Package
+Title: Evalaute the levels of mutual information in 16S data
+Version: 0.1.0
+Date: 2014-11-01
+Author: Gregory Ditzler
+Maintainer: Gregory Ditzler <gregory.ditzler@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: GNU GPL v3
+BugReports: http://github.com/gditzler/MicrobiomeInformation/issues
