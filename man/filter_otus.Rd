@@ -11,7 +11,8 @@ filter_otus(biom_df, lvl = 0.2)
 \item{lvl}{percentage of abundance to keep}
 }
 \value{
-return the biom_df with a subset of OTUs
+return the lists containing the reduced data, sample ids, feature names
+and feature ids.
 }
 \description{
 Many of the overall abundances for different taxa are quite low, so in this

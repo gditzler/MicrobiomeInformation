@@ -4,22 +4,22 @@
 #' variables and the class labels that have been extracted from the map file
 #' describing the metadata.
 #' 
-#' @param biom_df data.frame containing the OTU table
+#' @param data matrix with the OTU table
 #' @param labels class labels for each of the samples in the OTU table
 #' @param discrete discretize the data. default is FALSE
 #' @param disc method of performing discretization. available: equalfreq, 
-#' equalwidth, globalequalwidth. the default is equalfreq
+#' equalwidth, globalequalwidth. the default is equalwidth
 #' @param nbins number of bins to discretize into 
 #' @param method  method of performing mutual information calculation.
 #' @return returns a vector with the mutual information
-measure_otu_mi <- function(biom_df, labels, discrete=FALSE, disc="equalfreq", 
+measure_otu_mi <- function(data, labels, discrete=FALSE, disc="equalwidth", 
                            nbins=25, method="emp") {
   mi <- NULL
-  for (i in 1:length(biom_df$data_dense[,1])) {
+  for (i in 1:length(data[,1])) {
     if (discrete) {
-      X <- discretize(biom_df$data_dense[i,], disc=disc, nbins=nbins)
+      X <- discretize(data[i,], disc=disc, nbins=nbins)
     } else {
-      X <- biom_df$data_dense[i,]
+      X <- data[i,]
     }
     mi <- c(mi, mutinformation(X, labels, method=method))
   }

@@ -3,18 +3,18 @@
 \alias{measure_otu_mi}
 \title{Measure the mutual information in the OTU table}
 \usage{
-measure_otu_mi(biom_df, labels, discrete = FALSE, disc = "equalfreq",
+measure_otu_mi(data, labels, discrete = FALSE, disc = "equalwidth",
   nbins = 25, method = "emp")
 }
 \arguments{
-\item{biom_df}{data.frame containing the OTU table}
+\item{data}{matrix with the OTU table}
 
 \item{labels}{class labels for each of the samples in the OTU table}
 
 \item{discrete}{discretize the data. default is FALSE}
 
 \item{disc}{method of performing discretization. available: equalfreq,
-equalwidth, globalequalwidth. the default is equalfreq}
+equalwidth, globalequalwidth. the default is equalwidth}
 
 \item{nbins}{number of bins to discretize into}
 
