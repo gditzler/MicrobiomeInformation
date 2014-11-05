@@ -1,0 +1,35 @@
+---
+title: "Measuring the Information in 16S Community Data Matrices"
+author: "Gregory Ditzler"
+date: "November 4, 2014"
+output: 
+  html_document:
+    theme: cerulean
+    highlight: tango
+---
+
+# Building the Code and Documentation
+
+The **MicrobiomeInformation** package does not need to be installed to your `R` path to be able to run the notebook. Rather, the **devtools** library is used to build the documentation and load the  **MicrobiomeInformation** package into the environment. The following libraries must be installed 
+
+* biom (>= 0.3.12)
+* infotheo (>= 1.2.0)
+
+```{r, echo=FALSE}
+library("devtools")
+document()
+```
+
+# About this Notebook
+
+To be filled in later.
+
+## Loading and Preparing the Data
+```{r}
+biom_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom"
+map_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt"
+biom_df <- load_biom_matrix(biom_fp)
+map_df <- load_metadata(map_fp)
+```
+
+
