@@ -3,13 +3,15 @@
 \alias{cmi_matrix}
 \title{Compute the matrix of CMI}
 \usage{
-cmi_matrix(data, discrete = FALSE, disc = "equalwidth", nbins = 25,
+cmi_matrix(data, labels, discrete = TRUE, disc = "equalwidth", nbins = 25,
   method = "emp")
 }
 \arguments{
 \item{data}{matrix containing the OTU table}
 
-\item{discrete}{discretize the data. default is FALSE}
+\item{labels}{vector of discrete labels}
+
+\item{discrete}{discretize the data. default is TRUE}
 
 \item{disc}{method of performing discretization. available: equalfreq,
 equalwidth, globalequalwidth. the default is equalwidth}
@@ -17,8 +19,6 @@ equalwidth, globalequalwidth. the default is equalwidth}
 \item{nbins}{number of bins to discretize into}
 
 \item{method}{method of performing mutual information calculation.}
-
-\item{labels}{vector of discrete labels}
 }
 \value{
 returns a matrix with the pairwise conditional mutual information

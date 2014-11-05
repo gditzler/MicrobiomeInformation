@@ -5,18 +5,18 @@
 #' 
 #' @param data matrix containing the OTU table
 #' @param labels vector of discrete labels 
-#' @param discrete discretize the data. default is FALSE
+#' @param discrete discretize the data. default is TRUE
 #' @param disc method of performing discretization. available: equalfreq, 
 #' equalwidth, globalequalwidth. the default is equalwidth
 #' @param nbins number of bins to discretize into 
 #' @param method  method of performing mutual information calculation.
 #' @return returns a matrix with the pairwise conditional mutual information
-cmi_matrix <- function(data, discrete=FALSE, disc="equalwidth", 
+cmi_matrix <- function(data, labels, discrete=TRUE, disc="equalwidth", 
                       nbins=25, method="emp") {
   nfeat <- length(data[,1])
   cmi <- matrix(data=0, nrow=nfeat, ncol=nfeat)
   for (i in 1:nfeat) {
-    for (j in i+1) {
+    for (j in i:nfeat) {
       if (discrete) {
         X <- discretize(data[i,], disc=disc, nbins=nbins)
         Z <- discretize(data[j,], disc=disc, nbins=nbins)

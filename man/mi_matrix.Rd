@@ -3,13 +3,13 @@
 \alias{mi_matrix}
 \title{Compute the matrix of MI}
 \usage{
-mi_matrix(data, discrete = FALSE, disc = "equalwidth", nbins = 25,
+mi_matrix(data, discrete = TRUE, disc = "equalwidth", nbins = 25,
   method = "emp")
 }
 \arguments{
 \item{data}{matrix containing the OTU table}
 
-\item{discrete}{discretize the data. default is FALSE}
+\item{discrete}{discretize the data. default is TRUE}
 
 \item{disc}{method of performing discretization. available: equalfreq,
 equalwidth, globalequalwidth. the default is equalwidth}
