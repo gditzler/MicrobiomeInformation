@@ -1,11 +1,16 @@
 # build the documentation and load the package into the environment
 library("devtools")
 library("ggplot2")
+library("gplots")
+library("reshape2")
+library("plyr")
+library("Distance")
+
 document()
 
 # set up program constants
 col_name = "DIET_TYPE"
-lvl = 0.7
+lvl = 0.5
 nbins = 50
 
 # set the paths of the biom & map files then load them 
@@ -21,4 +26,13 @@ data <- lst$data
 mi <- mi_matrix(data, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
 cmi <- cmi_matrix(data, labels, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
 
-mi_df <- data.frame()
+
+image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
+image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(cmi), xlab="", ylab="")
+
+heatmap(1+data, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
+
+
+
+
+save.image("data/demo.RData")

@@ -15,6 +15,10 @@ The **MicrobiomeInformation** package does not need to be installed to your `R` 
 * biom (>= 0.3.12)
 * infotheo (>= 1.2.0)
 
+$$
+\mu = \int_{0}^{1} x \textrm{d}x
+$$
+
 ```{r, echo=FALSE}
 library("devtools")
 document()
@@ -28,8 +32,8 @@ To be filled in later.
 ```{r}
 biom_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom"
 map_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt"
-biom_df <- load_biom_matrix(biom_fp)
-map_df <- load_metadata(map_fp)
+#biom_df <- load_biom_matrix(biom_fp)
+#map_df <- load_metadata(map_fp)
 ```
 
 
