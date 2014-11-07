@@ -21,4 +21,7 @@ have the same proportion of bacteria; however, the abundances are different.
 For example, a=[1,2,3] is proportionally equal to b=[3,6,9]. The matrix is
 scaled and written to df$data_dense.
 }
+\author{
+Gregory Ditzler
+}
 

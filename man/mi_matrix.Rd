@@ -25,4 +25,12 @@ returns a matrix with the pairwise mutual information
 Calculate the pairwise mutual information for each of the features in
 data.
 }
+\examples{
+mi <- mi_matrix(data, labels, discrete=TRUE, disc="equalwidth", nbins=25, method="emp")
+}
+\author{
+Gregory Ditzler
+}
+\keyword{information}
+\keyword{mutual}
 

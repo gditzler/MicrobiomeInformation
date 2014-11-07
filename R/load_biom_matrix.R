@@ -1,10 +1,10 @@
-#' Read in a file in BIOM format. 
-#'
-#' This function reads in a biom file using the BIOM utilities. The function 
-#' then converts the data from a sparse to dense format.
-#'
 #' @param biom_fp string that points to the path of the biom file
 #' @return returns a data.frame that has the result from the biom & dense matrix
+#' @author Gregory Ditzler
+#' @title Read in a file in BIOM format
+#' @description
+#' This function reads in a biom file using the BIOM utilities. The function 
+#' then converts the data from a sparse to dense format.
 load_biom_matrix <- function(biom_fp) {
   df <- read_biom(biom_fp)  # requires the biom packges are installed  
   biom_data <- matrix(data=0, nrow=df$shape[1], ncol=df$shape[2])

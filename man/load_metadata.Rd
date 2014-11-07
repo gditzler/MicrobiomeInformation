@@ -14,4 +14,7 @@ data.frame containing the metadata
 \description{
 Load a map file in tab-delimited format
 }
+\author{
+Gregory Ditzler
+}
 

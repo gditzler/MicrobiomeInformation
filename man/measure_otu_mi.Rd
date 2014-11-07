@@ -28,4 +28,7 @@ This function measures the mutual information shared between the OTU
 variables and the class labels that have been extracted from the map file
 describing the metadata.
 }
+\author{
+Gregory Ditzler
+}
 

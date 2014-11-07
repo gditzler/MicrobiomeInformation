@@ -27,4 +27,7 @@ returns a matrix with the pairwise conditional mutual information
 Calculate the pairwise conditional mutual information for each of the
 features in data.
 }
+\author{
+Gregory Ditzler
+}
 

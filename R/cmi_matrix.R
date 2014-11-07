@@ -1,8 +1,3 @@
-#' Compute the matrix of CMI
-#' 
-#' Calculate the pairwise conditional mutual information for each of the 
-#' features in data. 
-#' 
 #' @param data matrix containing the OTU table
 #' @param labels vector of discrete labels 
 #' @param discrete discretize the data. default is TRUE
@@ -11,6 +6,11 @@
 #' @param nbins number of bins to discretize into 
 #' @param method  method of performing mutual information calculation.
 #' @return returns a matrix with the pairwise conditional mutual information
+#' @author Gregory Ditzler
+#' @title Compute the matrix of CMI
+#' @description
+#' Calculate the pairwise conditional mutual information for each of the 
+#' features in data. 
 cmi_matrix <- function(data, labels, discrete=TRUE, disc="equalwidth", 
                       nbins=25, method="emp") {
   nfeat <- length(data[,1])

@@ -1,5 +1,3 @@
-#' Mutual Information Maximization 
-#' 
 #' @param biom_df data.frame containing the OTU table
 #' @param labels class labels for each of the samples in the OTU table
 #' @param n_select number of OTUs to select 
@@ -10,6 +8,8 @@
 #' @param method  method of performing mutual information calculation.
 #' @return returns a data.frame containing the highest ranking indices 
 #' according to mutual information 
+#' @author Gregory Ditzler
+#' @title Mutual Information Maximization
 mi_selection <- function (biom_df, labels, n_select, discrete=FALSE, 
                           disc="equalfreq", nbins=25, method="emp") {
   mis <- measure_otu_mi(biom_df, labels, discrete=FALSE, disc="equalfreq", 

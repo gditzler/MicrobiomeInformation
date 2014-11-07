@@ -1,13 +1,13 @@
-#' Filter OTU maktrix by their abundance
-#' 
-#' Many of the overall abundances for different taxa are quite low, so in this
-#' function, we filter them to a smaller subset that contain only the variables
-#' that are the most abundant up to some pre-determined level. 
-#' 
 #' @param biom_df data.frame that has be OTU data
 #' @param lvl percentage of abundance to keep 
 #' @return return the lists containing the reduced data, sample ids, feature names
 #' and feature ids. 
+#' @author Gregory Ditzler
+#' @title Filter OTU matrix by their abundance
+#' @description
+#' Many of the overall abundances for different taxa are quite low, so in this
+#' function, we filter them to a smaller subset that contain only the variables
+#' that are the most abundant up to some pre-determined level. 
 filter_otus <- function(biom_df, lvl=0.2) {
   if (lvl > 1 || lvl < 0) {
     stop("lvl must be between zero and one.")

@@ -1,8 +1,3 @@
-#' Compute the matrix of MI
-#' 
-#' Calculate the pairwise mutual information for each of the features in 
-#' data. 
-#' 
 #' @param data matrix containing the OTU table
 #' @param discrete discretize the data. default is TRUE
 #' @param disc method of performing discretization. available: equalfreq, 
@@ -10,6 +5,14 @@
 #' @param nbins number of bins to discretize into 
 #' @param method  method of performing mutual information calculation.
 #' @return returns a matrix with the pairwise mutual information
+#' @keywords mutual information
+#' @examples
+#' mi <- mi_matrix(data, labels, discrete=TRUE, disc="equalwidth", nbins=25, method="emp")
+#' @author Gregory Ditzler
+#' @title Compute the matrix of MI
+#' @description
+#' Calculate the pairwise mutual information for each of the features in 
+#' data. 
 mi_matrix <- function(data, discrete=TRUE, disc="equalwidth", 
                       nbins=25, method="emp") {
   nfeat <- length(data[,1])

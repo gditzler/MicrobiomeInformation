@@ -10,8 +10,13 @@ retrieve_labels(map_df, sample_ids, col_name)
 
 \item{sample_ids}{list of sample ids containing the order of the samples
 in the data matrix}
+
+\item{col_name}{column name in the map file to extract the labels}
 }
 \description{
 Extract labels from a map data.frame
+}
+\author{
+Gregory Ditzler
 }
 

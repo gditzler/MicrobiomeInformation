@@ -29,4 +29,7 @@ according to mutual information
 \description{
 Mutual Information Maximization
 }
+\author{
+Gregory Ditzler
+}
 
