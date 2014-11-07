@@ -12,7 +12,7 @@ scale_matrix(biom_df, rescale = TRUE)
 to produce integer values. default is TRUE}
 }
 \value{
-return the data.frame with the scaled matrix
+return the scaled matrix
 }
 \description{
 This function normalizes the community data matrix, or sometimes referred to
