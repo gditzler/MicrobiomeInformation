@@ -9,15 +9,14 @@
 #' @param biom_df data.frame from loading the biom file.
 #' @param recscale if FALSE observations sum to one; otherwise they are rescaled
 #' to produce integer values. default is TRUE
-#' @return return the data.frame with the scaled matrix
+#' @return return the scaled matrix
 scale_matrix <- function (biom_df, rescale=TRUE) {
+  data <- biom_df$data_dense
   if (rescale) {
-    biom_df$data_dense <- scale(biom_df$data_dense+1, center=FALSE, 
-                                scale=colSums(biom_df$data_dense+1))
-    biom_df$data_dense <- floor(biom_df$data_dense/min(biom_df$data_dense))
+    data <- scale(data+1, center=FALSE, scale=colSums(data+1))
+    data <- floor(data/min(data))
   } else {
-    biom_df$data_dense <- scale(biom_df$data_dense, center=FALSE, 
-                                scale=colSums(biom_df$data_dense))
+    data <- scale(data, center=FALSE, scale=colSums(data))
   }
-  return(biom_df)
+  return(data)
 }
