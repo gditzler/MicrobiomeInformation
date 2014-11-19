@@ -15,13 +15,17 @@
 measure_otu_mi <- function(data, labels, discrete=FALSE, disc="equalwidth", 
                            nbins=25, method="emp") {
   mi <- NULL
-  for (i in 1:length(data[,1])) {
-    if (discrete) {
+  
+  if (discrete) {
+    for (i in 1:length(data[,1])) {
       X <- discretize(data[i,], disc=disc, nbins=nbins)
-    } else {
-      X <- data[i,]
+      mi <- c(mi, mutinformation(X, labels, method=method))
     }
-    mi <- c(mi, mutinformation(X, labels, method=method))
+  } else {
+    for (i in 1:length(data[,1])) {
+      mi <- c(mi, mutinformation(data[i,], labels, method=method))
+    }
   }
+
   return(mi)
 }

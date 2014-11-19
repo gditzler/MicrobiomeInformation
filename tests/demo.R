@@ -7,6 +7,7 @@ library("plyr")
 library("fields")
 
 document()
+load("data/demo.RData") # optional 
 
 # set up program constants
 col_name = "DIET_TYPE"   # column in the map files for the labels
@@ -49,30 +50,32 @@ hist(cmi_vec, xlab="conditional mutual information", main="Histogram of Conditio
 hist(mi_vec_f, xlab="mutual information", main="Histogram of Mutual Information")
 hist(cmi_vec_f, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information", prob=T)
 
+
+bin_w = 0.0007
 ggplot(data.frame(x=1:length(mi_vec), mi=mi_vec), aes(x=mi))+
-  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
-  geom_line(stat="density",colour='blue',size=2)
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
+  geom_line(stat="density", colour='blue',size=2)
+ggsave(file="data/plots/density-mi-full.pdf")
 
 ggplot(data.frame(x=1:length(cmi_vec), cmi=cmi_vec), aes(x=cmi))+
-  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
-  geom_line(stat="density",colour='blue',size=2)
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
+  geom_line(stat="density", colour='blue',size=2)
+ggsave(file="data/plots/density-cmi-full.pdf")
 
 ggplot(data.frame(x=1:length(mi_vec_f), mi=mi_vec_f), aes(x=mi))+
-  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
-  geom_line(stat="density",colour='blue',size=2)
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
+  geom_line(stat="density", colour='blue',size=2)
+ggsave(file="data/plots/density-mi-partial.pdf")
 
 ggplot(data.frame(x=1:length(cmi_vec_f), cmi=cmi_vec_f), aes(x=cmi))+
-  geom_histogram(aes(y=..density.., fill=..count..),colour='black',binwidth = .0007)+
-  geom_line(stat="density",colour='blue',size=2)
-
-ggplot(df1,aes(x=val)) + 
-  geom_histogram(aes(y=..density..),colour='black',fill='white',binwidth=1) + 
-  geom_density(colour='red',size=2)
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
+  geom_line(stat="density", colour='blue',size=2)
+ggsave(file="data/plots/density-cmi-partial.pdf")
 
 
 # what to plot...
 image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
-image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(cmi), xlab="", ylab="")
+image.plot(1:length(mi[1,]), 1:length(cmi[,1]), log(cmi), xlab="", ylab="")
 
 data2 <- data_filter
 data2 <- data2 / t(replicate(nrow(data2), colSums(data2)))

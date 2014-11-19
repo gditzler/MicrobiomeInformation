@@ -12,8 +12,20 @@
 #' @title Mutual Information Maximization
 mi_selection <- function (biom_df, labels, n_select, discrete=FALSE, 
                           disc="equalfreq", nbins=25, method="emp") {
-  mis <- measure_otu_mi(biom_df, labels, discrete=FALSE, disc="equalfreq", 
-                        nbins=25, method="emp")
+
+  mis <- NULL
+  if (discrete) {
+    for (i in 1:length(data[,1])) {
+      X <- discretize(data[i,], disc=disc, nbins=nbins)
+      mis <- c(mis, mutinformation(X, labels, method=method))
+    }
+  } else {
+    for (i in 1:length(data[,1])) {
+      mis <- c(mis, mutinformation(data[i,], labels, method=method))
+    }
+  }
+  
+  
   idx <- sort(mis, decreasing=TRUE, index.return=TRUE)
   idx_important <- idx[1:n_select]
   otu_df <- data.frame(otuID=biom_df$otu_ids[idx_important], 
