@@ -36,7 +36,21 @@ data_filter <- lst$data
 # compute mi & cmi matrices
 mi <- mi_matrix(data_filter, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
 cmi <- cmi_matrix(data_filter, labels, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
+
+# measure the OTUs MI and CMI
 mi_vec <- measure_otu_mi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+cmi_vec <- measure_otu_mi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+mi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+cmi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+
+
+hist(mi_vec, xlab="mutual information", main="Histogram of Mutual Information")
+hist(cmi_vec, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information")
+hist(mi_vec_f, xlab="mutual information", main="Histogram of Mutual Information")
+hist(cmi_vec_f, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information")
+
+
+
 
 # what to plot...
 image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
@@ -51,3 +65,4 @@ hm_df3 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, dis
 # labels[hm_df1$colInd]
 
 save.image("data/demo.RData")
+
