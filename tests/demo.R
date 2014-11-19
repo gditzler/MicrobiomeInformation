@@ -11,7 +11,7 @@ document()
 # set up program constants
 col_name = "DIET_TYPE"   # column in the map files for the labels
 lvl = 0.5                # filter level for OTUs
-nbins = 7               # number of bins for estimating the pdfs
+nbins = 50               # number of bins for estimating the pdfs
 
 # set the paths of the biom & map files then load them 
 biom_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom"
@@ -31,22 +31,23 @@ labels <- retrieve_labels(map_df, biom_df$sample_ids, col_name)
 # filter the otus to remove the low ranking otus that are very low in terms of 
 # the abunance
 lst <- filter_otus(biom_df, lvl=lvl)
-data <- lst$data
+data_filter <- lst$data
 
 # compute mi & cmi matrices
-mi <- mi_matrix(data, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
-cmi <- cmi_matrix(data, labels, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
+mi <- mi_matrix(data_filter, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
+cmi <- cmi_matrix(data_filter, labels, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
+mi_vec <- measure_otu_mi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
 
 # what to plot...
 image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
 image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(cmi), xlab="", ylab="")
 
-data2 <- data
+data2 <- data_filter
 data2 <- data2 / t(replicate(nrow(data2), colSums(data2)))
 
-hm_df1 <- heatmap(1+data, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
-hm_df2 <- heatmap(data, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'binary'))
-hm_df3 <- heatmap(data, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'euclidean'))
+hm_df1 <- heatmap(1+data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
+hm_df2 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'binary'))
+hm_df3 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'euclidean'))
 # labels[hm_df1$colInd]
 
 save.image("data/demo.RData")
