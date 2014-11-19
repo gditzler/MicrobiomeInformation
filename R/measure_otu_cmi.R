@@ -16,12 +16,16 @@ measure_otu_cmi <- function(data, labels, discrete=FALSE, disc="equalwidth",
                            nbins=25, method="emp") {
   cmi <- NULL
   for (i in 1:length(data[,1])) {
-    if (discrete) {
-      X <- discretize(data[i,], disc=disc, nbins=nbins)
-    } else {
-      X <- data[i,]
+    for (j in i:length(data[,1])){
+      if (discrete) {
+        X <- discretize(data[i,], disc=disc, nbins=nbins)
+        Y <- discretize(data[j,], disc=disc, nbins=nbins)
+      } else {
+        X <- data[i,]
+        Y <- data[j,]
+      }
+      cmi <- c(cmi, condinformation(X, labels, method=method))
     }
-    cmi <- c(cmi, condinformation(X, labels, method=method))
   }
   return(cmi)
 }

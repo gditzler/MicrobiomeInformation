@@ -10,7 +10,7 @@ document()
 
 # set up program constants
 col_name = "DIET_TYPE"   # column in the map files for the labels
-lvl = 0.5                # filter level for OTUs
+lvl = 0.75                # filter level for OTUs
 nbins = 50               # number of bins for estimating the pdfs
 
 # set the paths of the biom & map files then load them 
@@ -39,17 +39,35 @@ cmi <- cmi_matrix(data_filter, labels, discrete = TRUE, disc = "equalwidth", nbi
 
 # measure the OTUs MI and CMI
 mi_vec <- measure_otu_mi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
-cmi_vec <- measure_otu_mi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+cmi_vec <- measure_otu_cmi(data, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
 mi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
-cmi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
+cmi_vec_f <- measure_otu_cmi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
 
 
 hist(mi_vec, xlab="mutual information", main="Histogram of Mutual Information")
 hist(cmi_vec, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information")
 hist(mi_vec_f, xlab="mutual information", main="Histogram of Mutual Information")
-hist(cmi_vec_f, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information")
+hist(cmi_vec_f, xlab="conditional mutual information", main="Histogram of Conditional Mutual Information", prob=T)
 
+ggplot(data.frame(x=1:length(mi_vec), mi=mi_vec), aes(x=mi))+
+  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
+  geom_line(stat="density",colour='blue',size=2)
 
+ggplot(data.frame(x=1:length(cmi_vec), cmi=cmi_vec), aes(x=cmi))+
+  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
+  geom_line(stat="density",colour='blue',size=2)
+
+ggplot(data.frame(x=1:length(mi_vec_f), mi=mi_vec_f), aes(x=mi))+
+  geom_histogram(aes(y=..density..,fill=..count..),colour='black',binwidth = .0007)+
+  geom_line(stat="density",colour='blue',size=2)
+
+ggplot(data.frame(x=1:length(cmi_vec_f), cmi=cmi_vec_f), aes(x=cmi))+
+  geom_histogram(aes(y=..density.., fill=..count..),colour='black',binwidth = .0007)+
+  geom_line(stat="density",colour='blue',size=2)
+
+ggplot(df1,aes(x=val)) + 
+  geom_histogram(aes(y=..density..),colour='black',fill='white',binwidth=1) + 
+  geom_density(colour='red',size=2)
 
 
 # what to plot...
