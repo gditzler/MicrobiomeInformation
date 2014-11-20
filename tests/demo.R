@@ -17,6 +17,8 @@ nbins = 50               # number of bins for estimating the pdfs
 # set the paths of the biom & map files then load them 
 biom_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom"
 map_fp <- "~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt"
+d_name <- "ag-diet-ov"
+
 
 # load the biom & map files
 biom_df <- load_biom_matrix(biom_fp)
@@ -53,24 +55,26 @@ hist(cmi_vec_f, xlab="conditional mutual information", main="Histogram of Condit
 
 bin_w = 0.0007
 ggplot(data.frame(x=1:length(mi_vec), mi=mi_vec), aes(x=mi))+
-  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
-  geom_line(stat="density", colour='blue',size=2)
-ggsave(file="data/plots/density-mi-full.pdf")
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
+  #geom_line(stat="density", colour='blue',size=2)
+ggsave(file=paste("data/plots/",d_name,"-density-mi-full.pdf",sep=""))
 
 ggplot(data.frame(x=1:length(cmi_vec), cmi=cmi_vec), aes(x=cmi))+
-  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
-  geom_line(stat="density", colour='blue',size=2)
-ggsave(file="data/plots/density-cmi-full.pdf")
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
+  #geom_line(stat="density", colour='blue',size=2)
+ggsave(file=paste("data/plots/",d_name,"-density-cmi-full.pdf",sep=""))
+
 
 ggplot(data.frame(x=1:length(mi_vec_f), mi=mi_vec_f), aes(x=mi))+
-  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
-  geom_line(stat="density", colour='blue',size=2)
-ggsave(file="data/plots/density-mi-partial.pdf")
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
+  #geom_line(stat="density", colour='blue',size=2)
+ggsave(file=paste("data/plots/",d_name,"-density-mi-partial.pdf",sep=""))
+
 
 ggplot(data.frame(x=1:length(cmi_vec_f), cmi=cmi_vec_f), aes(x=cmi))+
-  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)+
-  geom_line(stat="density", colour='blue',size=2)
-ggsave(file="data/plots/density-cmi-partial.pdf")
+  geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
+  #geom_line(stat="density", colour='blue',size=2)
+ggsave(file=paste("data/plots/",d_name,"-density-cmi-partial.pdf",sep=""))
 
 
 # what to plot...
@@ -80,7 +84,7 @@ image.plot(1:length(mi[1,]), 1:length(cmi[,1]), log(cmi), xlab="", ylab="")
 data2 <- data_filter
 data2 <- data2 / t(replicate(nrow(data2), colSums(data2)))
 
-hm_df1 <- heatmap(1+data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
+hm_df1 <- heatmap(data_filter*10000+1, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
 hm_df2 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'binary'))
 hm_df3 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'euclidean'))
 # labels[hm_df1$colInd]

@@ -26,7 +26,7 @@ cmi_matrix <- function(data, labels, discrete=TRUE, disc="equalwidth",
       }
       # I(X;Z|Y)
       cmi[i,j] <- condinformation(X, Z, labels, method=method)
-      cmi[j,i] <- mi[i,j]  # mi is symmetric
+      cmi[j,i] <- cmi[i,j]  # mi is symmetric
     }
   }
   return(cmi)
