@@ -1,19 +1,5 @@
-# generate heatmaps of the mutual and conditional mutual information 
-# after the features have been filtered. 
+library("cluster")
 
-# build the documentation and load the package into the environment
-library("devtools")
-library("ggplot2")
-library("reshape2")
-library("plyr")
-library("fields")
-
-#document()
-
-# set up program constants
-lvl = 0.75                # filter level for OTUs
-nbins = 50               # number of bins for estimating the pdfs
-bin_w = 0.0007
 
 # set the paths of the biom & map files then load them 
 biom_fps <- c("~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom",
@@ -60,22 +46,15 @@ for (n in 1:length(biom_fps)) {
   data_filter <- lst$data
   otus_filter <- lst$otu_names
   
-  # compute mi & cmi matrices
-  mi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
-  cmi_vec_f <- measure_otu_cmi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
   
-  bin_w <- (max(mi_vec_f)-min(mi_vec_f))/25
-  ggplot(data.frame(x=1:length(mi_vec_f), mi=mi_vec_f), aes(x=mi))+
-    geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
-  #geom_line(stat="density", colour='blue',size=2)
-  ggsave(file=paste("data/plots/",d_name,"-density-mi-partial.pdf",sep=""))
+  d <- as.matrix(daisy(t(data_filter), metric="gower"))
+  pdf(paste("data/plots/",d_name,"-partial-distance.pdf", sep=""))
+  image.plot(1:length(d[1,]), 1:length(d[1,]), d, xlab="", ylab="")
+  dev.off()
   
-  bin_w <- (max(mi_vec_f)-min(mi_vec_f))/25
-  ggplot(data.frame(x=1:length(cmi_vec_f), cmi=cmi_vec_f), aes(x=cmi))+
-    geom_histogram(aes(y=..density.., fill=..count..), colour='black', binwidth=bin_w)#+
-  #geom_line(stat="density", colour='blue',size=2)
-  ggsave(file=paste("data/plots/",d_name,"-density-cmi-partial.pdf",sep=""))
+  d <- as.matrix(daisy(t(data), metric="gower"))
+  pdf(paste("data/plots/",d_name,"-full-distance.pdf", sep=""))
+  image.plot(1:length(d[1,]), 1:length(d[1,]), d, xlab="", ylab="")
+  dev.off()
   
 }
-
-

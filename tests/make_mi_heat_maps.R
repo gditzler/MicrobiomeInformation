@@ -63,12 +63,12 @@ for (n in 1:length(biom_fps)) {
   mi <- mi_matrix(data_filter, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
   cmi <- cmi_matrix(data_filter, labels, discrete = TRUE, disc = "equalwidth", nbins = nbins, method = "emp")
   
-  image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
   pdf(paste("data/plots/",d_name,"-mi-matrix.pdf", sep=""))
+  image.plot(1:length(mi[1,]), 1:length(mi[,1]), log(mi), xlab="", ylab="")
   dev.off()
   
-  image.plot(1:length(cmi[1,]), 1:length(cmi[,1]), log(cmi), xlab="", ylab="")
   pdf(paste("data/plots/",d_name,"-cmi-matrix.pdf", sep=""))
+  image.plot(1:length(cmi[1,]), 1:length(cmi[,1]), log(cmi), xlab="", ylab="")
   dev.off()
   
 }

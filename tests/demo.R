@@ -5,6 +5,7 @@ library("gplots")
 library("reshape2")
 library("plyr")
 library("fields")
+library("cluster")
 
 document()
 load("data/demo.RData") # optional 
@@ -87,6 +88,16 @@ data2 <- data2 / t(replicate(nrow(data2), colSums(data2)))
 hm_df1 <- heatmap(data_filter*10000+1, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'canberra'))
 hm_df2 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'binary'))
 hm_df3 <- heatmap(data_filter, col=cm.colors(256), Rowv = NULL, Colv = NULL, distfun=function(x) dist(x,method = 'euclidean'))
+
+hm_df3 <- heatmap(data_filter, 
+                  col=cm.colors(256), 
+                  Rowv = NULL, 
+                  Colv = NULL, 
+                  na.rm = TRUE, 
+                  distfun=function(x) as.dist(as.matrix(daisy( t(x), metric="gower" ) ))
+                  )
+
+
 # labels[hm_df1$colInd]
 
 save.image("data/demo.RData")
