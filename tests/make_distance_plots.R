@@ -1,20 +1,29 @@
+library("devtools")
+library("ggplot2")
+library("gplots")
+library("reshape2")
+library("plyr")
+library("fields")
 library("cluster")
+
+lvl = 0.75                # filter level for OTUs
+
 
 
 # set the paths of the biom & map files then load them 
-biom_fps <- c("~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom",
+biom_fps <- c(#"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom",
               #"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Sex.biom",
               "~/Git/DataCollections/Caporaso/caporaso-gut.biom"
 )
-map_fps <- c("~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt",
+map_fps <- c(#"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt",
              #"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Sex.txt",
              "~/Git/DataCollections/Caporaso/caporaso-gut.txt"
 )
-d_names <- c("ag-diet-ov",
+d_names <- c(#"ag-diet-ov",
              #"ag-gut-sex",
              "cap-gut-sex"
 )
-col_names <- c("DIET_TYPE",
+col_names <- c(#"DIET_TYPE",
                #"SEX",
                "SEX"
 )
@@ -47,12 +56,12 @@ for (n in 1:length(biom_fps)) {
   otus_filter <- lst$otu_names
   
   
-  d <- as.matrix(daisy(t(data_filter), metric="gower"))
+  d <- as.matrix(daisy(t(data_filter)))
   pdf(paste("data/plots/",d_name,"-partial-distance.pdf", sep=""))
   image.plot(1:length(d[1,]), 1:length(d[1,]), d, xlab="", ylab="")
   dev.off()
   
-  d <- as.matrix(daisy(t(data), metric="gower"))
+  d <- as.matrix(daisy(t(data)))
   pdf(paste("data/plots/",d_name,"-full-distance.pdf", sep=""))
   image.plot(1:length(d[1,]), 1:length(d[1,]), d, xlab="", ylab="")
   dev.off()
