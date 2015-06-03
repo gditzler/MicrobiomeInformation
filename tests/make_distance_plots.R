@@ -14,19 +14,19 @@ lvl = 0.75                # filter level for OTUs
 biom_fps <- c(#"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet.biom",
               #"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Sex.biom",
               "~/Git/DataCollections/Caporaso/caporaso-gut.biom"
-)
+              )
 map_fps <- c(#"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Diet-OV.txt",
              #"~/Git/DataCollections/AmericanGut/AmericanGut-Gut-Sex.txt",
              "~/Git/DataCollections/Caporaso/caporaso-gut.txt"
-)
+             )
 d_names <- c(#"ag-diet-ov",
              #"ag-gut-sex",
              "cap-gut-sex"
-)
+             )
 col_names <- c(#"DIET_TYPE",
                #"SEX",
                "SEX"
-)
+               )
 
 for (n in 1:length(biom_fps)) {
   
@@ -66,4 +66,5 @@ for (n in 1:length(biom_fps)) {
   image.plot(1:length(d[1,]), 1:length(d[1,]), d, xlab="", ylab="")
   dev.off()
   
+  mi_vec_f <- measure_otu_mi(data_filter, labels, discrete=TRUE, disc="equalwidth", nbins=nbins, method="emp")
 }
